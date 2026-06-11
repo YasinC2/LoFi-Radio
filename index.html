@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>LoFi Radio · Generative Beats</title>
-  <script src="lib/Tone-14.7.77.js"></script>
+  <!-- <script src="lib/Tone-14.7.77.js"></script> -->
+  <script src="lib/Tone-15.3.5.js"></script>
   <link rel="stylesheet" href="style/montagu-slab.css">
   <link rel="shortcut icon" href="icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.json">
@@ -365,21 +366,28 @@
       cursor: pointer;
       transition: 0.2s;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
 
     .track-mute::before {
-      content: '🔊';
-      filter: grayscale(1);
+      /* content: '🔊'; */
+      content: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c89f7b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-volume-2'%3E%3Cpolygon points='11 5 6 9 2 9 2 15 6 15 11 19 11 5'%3E%3C/polygon%3E%3Cpath d='M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07'%3E%3C/path%3E%3C/svg%3E");
+      line-height: 0;
     }
 
     .track-mute.muted {
-      background: #a5554a;
+      background: #a5554a57;
       border-color: #a5554a;
       opacity: 0.8;
     }
 
     .track-mute.muted::before {
-      content: '🔈';
+      /* content: '🔈'; */
+      content: url("data:image/svg+xml,%0A%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c89f7b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-volume-x'%3E%3Cpolygon points='11 5 6 9 2 9 2 15 6 15 11 19 11 5'%3E%3C/polygon%3E%3Cline x1='23' y1='9' x2='17' y2='15'%3E%3C/line%3E%3Cline x1='17' y1='9' x2='23' y2='15'%3E%3C/line%3E%3C/svg%3E");
+      line-height: 0;
     }
 
     .track-vol {
@@ -498,10 +506,30 @@
     </div>
 
     <div class="controls-row">
-      <button class="btn btn-play" id="btnPlay">▶</button>
-      <button class="btn btn-stop" id="btnStop">⏹</button>
-      <button class="btn btn-record" id="btnRecord">⏺ Rec</button>
-      <button class="btn" id="btnDownload" style="display:none;">⬇️ Download</button>
+      <button class="btn btn-play" id="btnPlay">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </button>
+      <button class="btn btn-stop" id="btnStop">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        </svg>
+      </button>
+      <button class="btn btn-record" id="btnRecord">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
+          <circle cx="12" cy="12" r="10"></circle>
+        </svg>
+        Rec
+      </button>
+      <button class="btn" id="btnDownload" style="display:none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download
+      </button>
       <div class="bpm-box">
         <input type="range" id="bpmSlider" min="50" max="120" value="78" step="1">
         <input type="number" id="bpmInput" min="50" max="120" value="78"> <span>BPM</span>
@@ -534,26 +562,70 @@
     </div>
 
     <div class="controls-row">
-      <button class="btn btn-toggle-mode" id="btnVariation" title="Natural variation">🎭 Variation</button>
+      <button class="btn btn-toggle-mode" id="btnVariation" title="Natural variation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shuffle">
+          <polyline points="16 3 21 3 21 8"></polyline>
+          <line x1="4" y1="20" x2="21" y2="3"></line>
+          <polyline points="21 16 21 21 16 21"></polyline>
+          <line x1="15" y1="15" x2="21" y2="21"></line>
+          <line x1="4" y1="4" x2="9" y2="9"></line>
+        </svg>
+        Variation
+      </button>
       <span style="font-size:0.7rem;color:#9a9084;">every</span>
       <input type="number" class="interval-input" id="variationInterval" value="10" min="4" max="60" step="1" title="Variation change interval in seconds">
       <span class="mr-10px" style="font-size:0.7rem;color:#9a9084;">sec</span>
-      <button class="btn btn-toggle-mode" id="btnAutoKey" title="Auto key switching">🔑 Auto Key</button>
+      <button class="btn btn-toggle-mode" id="btnAutoKey" title="Auto key switching">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-key">
+          <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+        </svg>
+        Auto Key
+      </button>
       <span style="font-size:0.7rem;color:#9a9084;">every</span>
       <input type="number" class="interval-input" id="autoKeyInterval" value="12" min="4" max="60" step="1" title="Key change interval in seconds">
       <span class="mr-10px" style="font-size:0.7rem;color:#9a9084;">sec</span>
-      <button class="btn btn-toggle-mode" id="btnAutoSeed" title="Auto seed rotation">🎲 Auto Seed</button>
+      <button class="btn btn-toggle-mode" id="btnAutoSeed" title="Auto seed rotation">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        Auto Seed
+      </button>
       <span style="font-size:0.7rem;color:#9a9084;">every</span>
       <input type="number" class="interval-input" id="autoSeedInterval" value="30" min="4" max="120" step="1" title="Seed change interval in seconds">
       <span style="font-size:0.7rem;color:#9a9084;">sec</span>
     </div>
 
     <div class="controls-row">
-      <button class="btn btn-random" id="btnRandom">🎲 New Random Pattern Seed</button>
-      <button class="btn btn-pattern active" data-pat="0">◈ Pattern 1</button>
-      <button class="btn btn-pattern" data-pat="1">◈ Pattern 2</button>
-      <button class="btn btn-pattern" data-pat="2">◈ Pattern 3</button>
-      <button class="btn btn-pattern" data-pat="3">◈ Pattern 4</button>
+      <button class="btn btn-random" id="btnRandom">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-zap">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+        New Random Pattern Seed
+      </button>
+      <button class="btn btn-pattern active" data-pat="0">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        Pattern 1
+      </button>
+      <button class="btn btn-pattern" data-pat="1">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        Pattern 2
+      </button>
+      <button class="btn btn-pattern" data-pat="2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        Pattern 3
+      </button>
+      <button class="btn btn-pattern" data-pat="3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+        Pattern 4
+      </button>
     </div>
 
     <div class="">
@@ -843,7 +915,7 @@
         });
 
         // Drums
-        kickSynth = new Tone.MembraneSynth({ pitchDecay: 0.04, volume: 1 }).connect(trackNodes.kick.gain);
+        kickSynth = new Tone.MembraneSynth({ pitchDecay: 0.007, octaves: 5, volume: 1.2 }).connect(trackNodes.kick.gain);
         trackNodes.kick.synth = kickSynth;
         snareNoise = new Tone.NoiseSynth({ noise: { type: 'pink' }, envelope: { attack: 0.001, decay: 0.14, sustain: 0.05, release: 0.3 }, volume: 10 }).connect(trackNodes.snare.gain);
         snareBody = new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.001, decay: 0.07, sustain: 0, release: 0.02 }, volume: 1 }).connect(trackNodes.snare.gain);
@@ -1190,7 +1262,8 @@
         Tone.Transport.bpm.value = currentBpm;
         Tone.Transport.start('+0.05');
         isPlaying = true;
-        btnPlay.textContent = '⏸';
+        btnPlay.innerHTML = `                
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pause"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>`;
         btnPlay.classList.add('playing');
         if (variationEnabled) startVariation();
         if (autoKeyEnabled) startAutoKey();
@@ -1201,7 +1274,10 @@
         Tone.Transport.pause();
         stopVinyl();
         isPlaying = false;
-        btnPlay.textContent = '▶';
+        btnPlay.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>`;
         btnPlay.classList.remove('playing');
         stopVariation();
         stopAutoKey();
@@ -1214,7 +1290,10 @@
         [drumLoop, chordLoop, bassLoop, melodyLoop, padLoop, guitarLoop, organLoop, pianoLoop, leadLoop].forEach(l => l?.dispose());
         drumLoop = chordLoop = bassLoop = melodyLoop = padLoop = guitarLoop = organLoop = pianoLoop = leadLoop = null;
         isPlaying = false;
-        btnPlay.textContent = '▶';
+        btnPlay.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>`;
         btnPlay.classList.remove('playing');
         stopVariation();
         stopAutoKey();
@@ -1224,7 +1303,8 @@
       btnPlay.addEventListener('click', async () => {
         if (!audioReady) {
           await initAudio();
-          btnPlay.textContent = '⏸';
+          btnPlay.innerHTML = `                
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pause"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>`;
           btnPlay.classList.add('playing');
           startTransport();
           return;
@@ -1383,7 +1463,11 @@
           isRecording = true;
           btnRecord.classList.add('active');
           btnRecord.classList.add('recording');
-          btnRecord.textContent = '⏺ Stop';
+          btnRecord.innerHTML = `          
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          </svg>
+          Stop Recording`;
           btnDownload.style.display = 'none';
         } else {
           const blob = await recorder.stop();
@@ -1391,7 +1475,9 @@
           isRecording = false;
           btnRecord.classList.remove('active');
           btnRecord.classList.remove('recording');
-          btnRecord.textContent = '⏺ Rec';
+          btnRecord.innerHTML = `          
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>
+          Rec`;
           const url = URL.createObjectURL(blob);
           btnDownload.style.display = 'inline-flex';
           btnDownload.onclick = () => {

@@ -1,8 +1,8 @@
-const CACHE_NAME = 'LoFi-Radio-v1.0.1';
+const CACHE_NAME = 'LoFi-Radio-v1.0.2';
 const OFFLINE_PAGE = 'index.html';
 const ASSETS = [
   'index.html',
-  'lib/Tone-14.7.77.js',
+  'lib/Tone-15.3.5.js',
   'icon.svg',
   'icon-512.png',
   'icon-192.png',
