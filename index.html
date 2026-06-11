@@ -1150,6 +1150,7 @@
       }
 
       function startAutoSeed() {
+        patternBtns.forEach(b => b.classList.remove('active'));
         stopAutoSeed();
         if (!autoSeedEnabled || !isPlaying) return;
         autoSeedTimer = setInterval(() => {
@@ -1275,6 +1276,7 @@
       });
 
       btnRandom.addEventListener('click', () => {
+        patternBtns.forEach(b => b.classList.remove('active'));
         seed = Math.floor(Math.random() * 10000);
         currentPatternData = generatePatterns();
         flashButton(btnRandom);
@@ -1448,6 +1450,14 @@
       currentPatternData = generatePatterns();
       setBpm(78);
     })();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => console.log('Service Worker Registered'));
+      });
+    }
   </script>
 </body>
 
